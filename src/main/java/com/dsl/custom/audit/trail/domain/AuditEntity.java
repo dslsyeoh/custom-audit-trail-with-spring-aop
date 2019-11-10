@@ -29,6 +29,9 @@ public class AuditEntity
     private AuditAction action;
 
     @Column(updatable = false, nullable = false)
+    private String description;
+
+    @Column(updatable = false, nullable = false)
     private String auditTarget;
 
     @CreationTimestamp
