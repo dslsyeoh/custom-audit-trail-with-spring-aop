@@ -24,6 +24,7 @@ public class AuditServiceHandler implements AuditService
         System.out.println("create method invoked by spring aop through reflection");
         AuditEntity auditEntity = new AuditEntity();
         auditEntity.setAction(AuditAction.CREATE);
+        auditEntity.setDescription(AuditAction.CREATE.name());
         auditEntity.setAuditTarget(auditTarget);
         auditRepository.save(auditEntity);
     }

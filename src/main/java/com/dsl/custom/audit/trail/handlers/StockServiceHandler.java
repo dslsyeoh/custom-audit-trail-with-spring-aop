@@ -44,6 +44,7 @@ public class StockServiceHandler implements StockService
     }
 
     @Override
+    @Audited(value = "STOCK", target = AuditService.class)
     public Stock create(Stock stock)
     {
         StockEntity entity = new StockEntity();
