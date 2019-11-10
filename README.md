@@ -1,1 +1,1 @@
-To create custom audit trail for CRUD operations
+Practice to create simple custom audit trail on JPA CRUD operations using spring aop
