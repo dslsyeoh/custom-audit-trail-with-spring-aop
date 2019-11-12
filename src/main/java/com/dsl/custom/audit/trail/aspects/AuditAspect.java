@@ -5,6 +5,7 @@
 
 package com.dsl.custom.audit.trail.aspects;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AuditAspect
     private ApplicationContext applicationContext;
 
     @AfterReturning(value = "@annotation(audited)", returning = "retVal")
-    public void auditAfterStockServiceInvoked(Object retVal, Audited audited) throws Throwable
+    public void auditAfterStockServiceInvoked(JoinPoint joinPoint, Object retVal, Audited audited) throws Throwable
     {
         System.out.println("audit after stock service invoked");
         System.out.println("retVal: " + retVal);
@@ -27,6 +28,6 @@ public class AuditAspect
 
         Class<?> clazz = audited.target();
         Object object = applicationContext.getBean(clazz);
-        clazz.getMethod("create", String.class).invoke(object, audited.value());
+        clazz.getMethod(joinPoint.getSignature().getName(), String.class).invoke(object, audited.value());
     }
 }
